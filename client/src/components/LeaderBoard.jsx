@@ -7,31 +7,37 @@ const LeaderBoard = () => {
     {
       rank: 1,
       username: "Umar Farooq",
+      problemsSolved: 4,
       rating: 2882,
     },
     {
       rank: 2,
       username: "Uzair Shabbir",
+      problemsSolved: 4,
       rating: 2881,
     },
     {
       rank: 3,
       username: "Muhammad Rumman",
+      problemsSolved: 4,
       rating: 2200,
     },
     {
       rank: 4,
       username: "Muhammad Arslan",
+      problemsSolved: 4,
       rating: 2000,
     },
     {
       rank: 5,
       username: "Hasnain Ali",
+      problemsSolved: 4,
       rating: 1798,
     },
     {
       rank: 6,
       username: "Muhammad Tayyab",
+      problemsSolved: 4,
       rating: 1557,
     },
   ];
@@ -44,16 +50,21 @@ const LeaderBoard = () => {
       >
         Leaderboard
       </h2>
-      <div className="h-0.5 w-full bg-gray-200 my-3"></div>
+      <div
+        className={`h-0.5 w-full ${isDark ? "bg-[#3b3440]" : "bg-gray-200"} my-3`}
+      ></div>
       <div className=" overflow-y-auto max-h-50">
-        <div className="flex justify-start items-center gap-14 px-5 pr-16 font-bold">
+        <div className="flex justify-start items-center gap-17 px-5 pr-16 font-bold">
           <div>Rank</div>
           <div className="grow">Username</div>
+          <div>Solved</div>
           <div>Rating</div>
         </div>
         {leaderboardData.map((data) => {
           return (
-            <div className="flex justify-start items-center gap-21 px-5 pr-16 my-2">
+            <div
+              className={`flex justify-start items-center gap-18 px-5 pr-16 pb-1 my-2 border-b ${isDark ? "border-gray-800" : "border-gray-200"}`}
+            >
               <div
                 className={`${data.rank == 1 && "bg-[#f7c631] text-white"} ${data.rank == 2 && "bg-[#bebdb9] text-white"} ${data.rank == 3 && "bg-[#99580e] text-white"} py-1 px-3 font-bold rounded-xs`}
               >
@@ -61,6 +72,7 @@ const LeaderBoard = () => {
                 {data.rank}
               </div>
               <div className="grow">{data.username}</div>
+              <div className="mr-6">{data.problemsSolved}</div>
               <div>{data.rating}</div>
             </div>
           );

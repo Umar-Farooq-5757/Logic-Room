@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div className="flex my-4 min-h-[90vh] px-6 py-4">
       {/* Problems container */}
-      <div className="rounded-xl w-4/6 px-4 py-3 flex flex-col gap-4">
+      <div className="rounded-xl w-4/6 px-4 py-3 flex flex-col gap-6">
         <LeaderBoard />
         <Problems />
       </div>
