@@ -49,7 +49,7 @@ const dummyProblemsData = [
     title: "Two Sum Closest",
     statement:
       "Given an array of N integers and an integer X, find two distinct elements whose sum is closest to X. Output their indices (1-based). If multiple answers exist, output any.",
-    input_format: "First line: N X. Second line: N integers A1 A2 ... AN.",
+    input_format: "First line: N X.\n Second line: N integers A1 A2 ... AN.",
     output_format: "Two integers i j (1 ≤ i < j ≤ N).",
     constraints: "2 ≤ N ≤ 2*10^5, |Ai| ≤ 10^9, |X| ≤ 10^9",
     samples: [
