@@ -4,14 +4,14 @@ import { useAppContext } from "../contexts/AppContext";
 import Math from "../utils/Math";
 import { IoMdTime } from "react-icons/io";
 import { MdOutlineMemory } from "react-icons/md";
-import CodeEditor from "../components/CodeEditor";
+import Editor from "../components/Editor";
 const Problem = () => {
   // Expected problem schema
   // id, title, slug, statement, timeLimitMs, memoryLimitKb, difficulty, tags
   // console.log(dummyProblemsData[2]);
   const { isDark } = useAppContext();
   let idx = 2;
-  const [code, setCode] = useState('// write code here\nconsole.log("hello");');
+  const [code, setCode] = useState('// write code here\nconsole.log("Hello World");');
   return (
     <div className="flex gap-3 px-3 mt-5">
       {/* Problem Statement */}
@@ -109,15 +109,7 @@ const Problem = () => {
       </section>
       {/* Editor */}
       <section className="border border-orange-400 w-1/2">
-        <CodeEditor
-          value={code}
-          onChange={setCode}
-          language="javascript"
-          theme="dark"
-          showLineNumbers={true}
-          fontSize={15}
-          height="480px"
-        />
+      <Editor code={code}/>
       </section>
     </div>
   );
