@@ -46,7 +46,7 @@ const Dropdown = ({
       </button>
 
       {isOpen && (
-        <ul className="w-full border z-50 border-gray-300 rounded-lg shadow-md mt-1 py-2 bg-white absolute top-9 **opacity-100 z-10**">
+        <ul className="w-full border z-50 border-gray-300 rounded-lg shadow-md mt-1 py-2 bg-white absolute top-9">
           {languages.map((language) => (
             <li
               key={language.name}

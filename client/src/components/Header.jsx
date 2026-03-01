@@ -49,7 +49,7 @@ const Header = () => {
         >
           UF
           {/* Profile Menu */}
-          <div className={`${!isProfileMenuOpen && "hidden"} fixed inset-0`}>
+          <div className={`${!isProfileMenuOpen && "hidden"} fixed inset-0 z-1000`}>
             <div
               onClick={(e) => e.stopPropagation()}
               className={`absolute font-medium px-3 py-6 flex flex-col gap-0.5 items-start w-60 h-40 transition-all right-34 top-12 border-2   ${isDark ? "border-[#3b3440] bg-[#16171d]" : "border-gray-300 text-black bg-white"} shadow-xl rounded-xl `}
