@@ -5,7 +5,7 @@ import { FaCheckCircle, FaFire } from "react-icons/fa";
 import { MdLeaderboard } from "react-icons/md";
 import { AiOutlineBackward } from "react-icons/ai";
 import LeaderBoard from "../components/LeaderBoard";
-import Problems from "../components/Problems";
+import ProblemsTable from "../components/ProblemsTable";
 
 const Home = () => {
   const { isDark } = useAppContext();
@@ -14,7 +14,7 @@ const Home = () => {
       {/* Problems container */}
       <div className="rounded-xl w-4/6 px-4 py-3 flex flex-col gap-6">
         <LeaderBoard />
-        <Problems />
+        <ProblemsTable />
       </div>
       {/* Stats */}
       <div className="rounded-xl w-2/6 px-4 py-3 flex flex-col gap-4">

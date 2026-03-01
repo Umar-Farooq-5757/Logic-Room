@@ -13,7 +13,7 @@ const Header = () => {
     <header
       className={`flex justify-between items-center shadow-sm ${isDark && "shadow-[#3b3440]"} py-3 px-32`}
     >
-      <h1 className="font-bold text-2xl">Logic Room</h1>
+      <h1 onClick={()=>navigate('/')} className="font-bold text-2xl cursor-pointer">Logic Room</h1>
       <div className="buttons flex justify-center items-center gap-7">
         <button
           className="hover:opacity-100 opacity-70 p-1.5 rounded-full transition-all"

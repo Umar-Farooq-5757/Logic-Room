@@ -2,7 +2,7 @@ import React from "react";
 import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
-const Problems = () => {
+const ProblemsTable = () => {
   const { isDark } = useAppContext();
   const navigate = useNavigate()
   const problemsData = [
@@ -42,7 +42,7 @@ const Problems = () => {
           return (
             <div
             onClick={()=>navigate('/problem')}
-              className={`flex justify-start items-center ${isDark?'hover:bg-[#3b3440]':'hover:bg-gray-200'} gap-18 px-5 pr-16 py-2.5 rounded-md border-b ${isDark ? "border-gray-800" : "border-gray-200"}`}
+              className={`flex justify-start cursor-pointer items-center ${isDark?'hover:bg-[#3b3440]':'hover:bg-gray-100'} gap-18 px-5 pr-16 py-2.5 rounded-md border-b ${isDark ? "border-gray-800" : "border-gray-200"}`}
             >
               <div>{problem.id}</div>
               <div className="grow">{problem.title}</div>
@@ -58,4 +58,4 @@ const Problems = () => {
   );
 };
 
-export default Problems;
+export default ProblemsTable;
