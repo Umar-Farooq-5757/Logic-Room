@@ -1,11 +1,8 @@
 import React, { useState } from "react";
+import { useAppContext } from "../../contexts/AppContext";
 
-const Dropdown = ({
-  selectedLanguage,
-  setSelectedLanguage,
-  languages,
-  isDark,
-}) => {
+const Dropdown = ({ selectedLanguage, setSelectedLanguage, languages }) => {
+  const { isDark } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const handleSelect = (language) => {
     setSelectedLanguage(language);
@@ -16,7 +13,7 @@ const Dropdown = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex justify-between items-center text-left px-4 pr-2 py-2 border rounded-lg  ${isDark ? "bg-[#272727] text-gray-300 hover:bg-gray-700" : "bg-white text-gray-800 hover:bg-gray-50"} border-gray-300 shadow-sm  focus:outline-none`}
+        className={`w-full flex justify-between items-center text-left px-4 pr-2 py-2 border rounded-lg  ${isDark ? "bg-[#16171d] border-[#3b3440]" : "bg-white border-gray-300"} shadow-sm  focus:outline-none`}
       >
         <span className="flex items-center gap-3">
           <div className="size-5 rounded-md overflow-hidden">
@@ -46,11 +43,13 @@ const Dropdown = ({
       </button>
 
       {isOpen && (
-        <ul className="w-full border z-50 border-gray-300 rounded-lg shadow-md mt-1 py-2 bg-white absolute top-9">
+        <ul
+          className={`w-full border z-50 rounded-lg shadow-md mt-1 py-2 ${isDark ? "bg-[#16171d] border-[#3b3440]" : "bg-white border-gray-300"} absolute top-9`}
+        >
           {languages.map((language) => (
             <li
               key={language.name}
-              className={`px-4 py-2 ${isDark ? "bg-[#272727]" : "bg-white"} cursor-default hover:bg-gray-100 flex items-center gap-3`}
+              className={`px-4 py-2 cursor-default ${isDark ? "hover:bg-gray-800" : "hover:bg-gray-100"} flex items-center gap-3`}
               onClick={() => {
                 handleSelect(language.value);
               }}
