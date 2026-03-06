@@ -20,18 +20,15 @@ const Problem = sequelize.define("Problem", {
   difficulty: {
     type: DataTypes.ENUM("easy", "medium", "hard"),
     allowNull: false,
-    unique: true,
   },
   timeLimitMs: {
     type: DataTypes.NUMBER,
     allowNull: false,
-    unique: true,
     defaultValue: 2000,
   },
   memoryLimitKb: {
     type: DataTypes.NUMBER,
     allowNull: false,
-    unique: true,
     defaultValue: 65536,
   },
 });

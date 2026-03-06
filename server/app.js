@@ -1,27 +1,30 @@
 import express from "express";
-import dotenv from 'dotenv'
-import sequelize from './config/db.js'
 const app = express();
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
+import sequelize from "./config/db.js";
+import userRouter from "./routes/user.routes.js";
 
-const port = process.env.PORT
+const port = process.env.PORT;
+app.use(express.json())
 
 app.get("/", (req, res) => {
   res.send("Server is running");
 });
+app.use("/api", userRouter);
 
 async function startServer() {
   try {
     await sequelize.authenticate();
-    console.log('✅ MySQL Connection established.');
-    
-    await sequelize.sync({ alter: true }); 
-    
+    console.log("✅ MySQL Connection established.");
+
+    await sequelize.sync({ alter: true });
+
     app.listen(port, () => {
       console.log(`🚀 Server running on http://localhost:${port}`);
     });
   } catch (error) {
-    console.error('❌ Unable to connect to the database:', error);
+    console.error("❌ Unable to connect to the database:", error);
   }
 }
-startServer() 
+startServer();

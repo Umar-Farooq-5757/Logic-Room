@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
-const User = sequelize.define("Problem", {
+const User = sequelize.define("User", {
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -17,12 +17,7 @@ const User = sequelize.define("Problem", {
     allowNull: false,
   },
   rating: {
-    type: DataTypes.NUMBER,
-    allowNull: false,
-  },
-  passwordHash: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+    type: DataTypes.INTEGER,
+  }
 });
 export default User;
