@@ -54,7 +54,7 @@ export default function Editor({
 
   return (
     <div
-      className={`flex border ${isDark ? "border-[#3b3440]" : "border-gray-300"} ${isDark?'bg-transparent text-gray-100':'bg-gray-100 text-gray-700'}  rounded-xl h-full w-full overflow-hidden`}
+      className={`flex border editor ${isDark ? "border-[#3b3440]" : "border-gray-300"} ${isDark?'bg-transparent text-gray-100':'bg-gray-100 text-gray-700'}  rounded-xl h-full w-full overflow-hidden`}
     >
       {/* Line Numbers */}
       {showLineNumbers && (

@@ -6,11 +6,11 @@ import { Outlet } from "react-router-dom";
 function App() {
   const { isDark } = useAppContext();
   return (
-    <div
+    <main
       className={`${isDark ? "bg-[#16171d] text-white" : "bg-white"} min-h-screen`}
     >
       <Outlet />
-    </div>
+    </main>
   );
 }
 

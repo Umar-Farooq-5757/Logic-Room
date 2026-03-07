@@ -16,15 +16,15 @@ app.use("/api", userRouter);
 async function startServer() {
   try {
     await sequelize.authenticate();
-    console.log("✅ MySQL Connection established.");
+    console.log("MySQL Connection established.");
 
     await sequelize.sync({ alter: true });
 
     app.listen(port, () => {
-      console.log(`🚀 Server running on http://localhost:${port}`);
+      console.log(`Server running on http://localhost:${port}`);
     });
   } catch (error) {
-    console.error("❌ Unable to connect to the database:", error);
+    console.error("Unable to connect to the database:", error);
   }
 }
 startServer();
