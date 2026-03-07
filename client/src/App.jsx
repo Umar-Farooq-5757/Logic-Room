@@ -4,7 +4,7 @@ import { useAppContext } from "./contexts/AppContext";
 import { Outlet } from "react-router-dom";
 
 function App() {
-  const { isDark } = useAppContext();
+  const { isDark } = useAppContext()
   return (
     <main
       className={`${isDark ? "bg-[#16171d] text-white" : "bg-white"} min-h-screen`}

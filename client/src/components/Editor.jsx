@@ -12,7 +12,7 @@ export default function Editor({
 }) {
   const {isDark} = useAppContext()
   const [code, setCode] = useState(
-    `function hello() {\nconsole.log("Hello World");
+    `function hello() {\n\tconsole.log("Hello World");
 }`,
   );
 
