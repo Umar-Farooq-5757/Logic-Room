@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import sequelize from "./config/db.js";
 import userRouter from "./routes/user.routes.js";
+import submissionRouter from "./routes/submission.routes.js";
 
 const port = process.env.PORT;
 app.use(express.json());
@@ -14,13 +15,14 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 app.use("/api", userRouter);
+app.use('/api',submissionRouter)
 
 async function startServer() {
   try {
     await sequelize.authenticate();
     console.log("MySQL Connection established.");
 
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
 
     app.listen(port, () => {
       console.log(`Server running on http://localhost:${port}`);

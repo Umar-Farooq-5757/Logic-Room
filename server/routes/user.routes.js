@@ -5,6 +5,6 @@ import protect from "../middlewares/auth.js";
 
 router.post("/register", userController.registration);
 router.post("/login", userController.login);
-router.get("/me",protect, userController.getUserData);
+router.get("/me", protect, userController.getUserData);
 
 export default router;
