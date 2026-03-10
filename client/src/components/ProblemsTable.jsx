@@ -3,7 +3,7 @@ import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const ProblemsTable = () => {
-  const { isDark } = useAppContext();
+  const { isDark,problems, } = useAppContext();
   const navigate = useNavigate()
   const problemsData = [
     {
@@ -25,6 +25,7 @@ const ProblemsTable = () => {
       difficulty: "hard",
     },
   ];
+
   return (
     <div
       className={`border ${isDark ? "border-[#3b3440]" : "border-gray-300"} rounded-xl shadow-xs h-6/10 px-6 py-3`}
@@ -38,15 +39,16 @@ const ProblemsTable = () => {
         className={`h-0.5 w-full ${isDark ? "bg-[#3b3440]" : "bg-gray-200"} my-3`}
       ></div>
       <div className=" overflow-y-auto max-h-84">
-        {problemsData.map((problem) => {
+        {problems.map((problem) => {
           return (
             <div
-            onClick={()=>navigate('/problem')}
-              className={`flex justify-start cursor-pointer items-center ${isDark?'hover:bg-[#3b3440]':'hover:bg-gray-100'} gap-18 px-5 pr-16 py-2.5 rounded-md border-b ${isDark ? "border-gray-800" : "border-gray-200"}`}
+              key={problem.id}
+              onClick={() => navigate(`/problem/${problem.slug}`)}
+              className={`flex justify-start cursor-pointer items-center ${isDark ? 'hover:bg-[#3b3440]' : 'hover:bg-gray-100'} gap-18 px-5 pr-16 py-2.5 rounded-md border-b ${isDark ? "border-gray-800" : "border-gray-200"}`}
             >
               <div>{problem.id}</div>
               <div className="grow">{problem.title}</div>
-              <div className={`${problem.difficulty=='easy' && 'text-[#1cbaba]'} ${problem.difficulty=='med.' && 'text-[#ffb700]'} ${problem.difficulty=='hard' && 'text-red-500'}`}>
+              <div className={`${problem.difficulty == 'easy' && 'text-[#1cbaba]'} ${problem.difficulty == 'med.' && 'text-[#ffb700]'} ${problem.difficulty == 'hard' && 'text-red-500'}`}>
                 {problem.difficulty.charAt(0).toUpperCase() +
                   problem.difficulty.slice(1)}
               </div>

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import dotenv from 'dotenv'
+import Submission from '../models/Submission.js';
 dotenv.config()
 
 const USE_RAPIDAPI = process.env.USE_RAPIDAPI === "true";
@@ -215,7 +216,20 @@ const runCode = async (req, res) => {
     }
 }
 
+const createSubmission = async (req, res) => {
+    try {
+        const sub = await Submission.create(req.body); 
+        res.json({ success: true, message: "submitted successfully" });
+    } catch (err) {
+        console.error("DATABASE ERROR:", err.parent || err); 
+        res.status(500).json({ 
+            success: false, 
+            message: err.parent ? err.parent.sqlMessage : "Error while submitting" 
+        });
+    }
+}
+
 // Health check
 const checkHealth = (req, res) => res.json({ ok: true, ts: Date.now() })
 
-export default { submit, checkResult, runCode, checkHealth }
+export default { submit, checkResult, runCode, checkHealth,createSubmission }

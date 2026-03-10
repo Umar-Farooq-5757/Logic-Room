@@ -6,14 +6,14 @@ import { useAppContext } from "../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { isDark, setIsDark } = useAppContext();
+  const { isDark, setIsDark, user } = useAppContext();
   const navigate = useNavigate();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   return (
     <header
       className={`flex justify-between items-center shadow-sm ${isDark && "shadow-[#3b3440]"} py-3 px-32`}
     >
-      <h1 onClick={()=>navigate('/')} className="font-bold text-2xl cursor-pointer">Logic Room</h1>
+      <h1 onClick={() => navigate('/')} className="font-bold text-2xl cursor-pointer">Logic Room</h1>
       <div className="buttons flex justify-center items-center gap-7">
         <button
           className="hover:opacity-100 opacity-70 p-1.5 rounded-full transition-all"
@@ -37,13 +37,7 @@ const Header = () => {
             <FaGithub className="size-5.5" />
           </a>
         </button>
-        <button
-          onClick={() => navigate("/login")}
-          className="hover:opacity-100 opacity-70 p-1.5 rounded-full transition-all"
-        >
-          <MdLogin className="size-5.5" />
-        </button>
-        <button
+        {user?.email?.length && <button
           onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
           className={`p-1.5 relative text-sm rounded-full transition-all text-white font-bold ${isDark ? "bg-[#b39adb]" : "bg-[#6b1eb9]"}`}
         >
@@ -74,7 +68,18 @@ const Header = () => {
               </div>
             </div>
           </div>
-        </button>
+        </button>}
+        {!user?.email?.length ? <button
+          onClick={() => { navigate("/login"); window.location.reload() }}
+          className="hover:opacity-100 opacity-70 p-1.5 rounded-full transition-all"
+        >
+          <MdLogin className="size-5.5" />
+        </button> : <button
+          onClick={() => { localStorage.removeItem('token'); window.location.reload(); navigate('/login') }}
+          className="hover:opacity-100 opacity-70 p-1.5 rounded-full transition-all"
+        >
+          <MdLogout className="size-5.5" />
+        </button>}
       </div>
     </header>
   );

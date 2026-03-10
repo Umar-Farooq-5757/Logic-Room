@@ -20,5 +20,6 @@ router.get('/submission/:token', protect, submissionController.checkResult);
 // Alternative method (run)
 router.post('/run', protect, submissionController.runCode);
 router.get("/health", protect, submissionController.checkHealth);
+router.post('/create-submission',protect,submissionController.createSubmission)
 
 export default router;

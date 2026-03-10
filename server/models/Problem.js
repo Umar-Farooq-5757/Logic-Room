@@ -15,21 +15,36 @@ const Problem = sequelize.define("Problem", {
   statement: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
   difficulty: {
     type: DataTypes.ENUM("easy", "medium", "hard"),
     allowNull: false,
   },
+  constraints: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   timeLimitMs: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 2000,
   },
   memoryLimitKb: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 65536,
   },
+  example_input: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  example_output: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  explaination:{
+    type:DataTypes.STRING,
+    allowNull:false
+  }
 });
 export default Problem

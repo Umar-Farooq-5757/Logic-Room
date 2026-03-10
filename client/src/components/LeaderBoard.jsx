@@ -63,6 +63,7 @@ const LeaderBoard = () => {
         {leaderboardData.map((data) => {
           return (
             <div
+            key={data.rank}
               className={`flex justify-start items-center gap-18 px-5 pr-16 pb-1 my-2 border-b ${isDark ? "border-gray-800" : "border-gray-200"}`}
             >
               <div

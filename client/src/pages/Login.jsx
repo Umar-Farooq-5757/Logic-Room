@@ -2,6 +2,7 @@ import React, { useState, } from "react";
 import api from "../api/axios";
 import toast, { Toaster } from "react-hot-toast";
 import { login } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const UserLogin = ({ setMethod }) => {
   const [email, setEmail] = useState('')
@@ -14,14 +15,16 @@ const UserLogin = ({ setMethod }) => {
       }else{
         localStorage.setItem('token',response.data.token)
         toast.success(response.data.message)
+        window.location = '/'
       }
       console.log(response.data)
     } catch (err) {
+      toast.error(err.message)
       console.error(err);
     }
   }
   return (
-    <> <div className="min-h-1/2 w-3/8 border-2 rounded-lg shadow-sm border-gray-300 bg-white py-7 px-5 flex flex-col justify-center gap-7">
+    <> <div className="min-h-1/2 w-9/10 sm:3/4 md:w-1/2 lg:w-3/8 border-2 rounded-lg shadow-sm border-gray-300 bg-white py-7 px-5 flex flex-col justify-center gap-7">
       <div>
         <h1 className="font-extrabold text-3xl text-center">
           Welcome Back!
@@ -81,6 +84,7 @@ const UserSignup = ({ setMethod }) => {
         toast.error(response.data.message)
       }else{
         toast.success(response.data.message)
+        setMethod('login')
       }
       console.log(response.data)
     } catch (err) {
@@ -88,7 +92,7 @@ const UserSignup = ({ setMethod }) => {
     }
   }
   return (
-    <> <div className="min-h-1/2 w-3/8 border-2 rounded-lg shadow-sm border-gray-300 bg-white py-7 px-5 flex flex-col justify-center gap-7">
+    <> <div className="min-h-1/2 w-9/10 sm:3/4 md:w-1/2 lg:w-3/8 border-2 rounded-lg shadow-sm border-gray-300 bg-white py-7 px-5 flex flex-col justify-center gap-7">
       
       <div>
         <h1 className="font-extrabold text-3xl text-center">

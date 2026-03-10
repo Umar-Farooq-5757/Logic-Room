@@ -1,46 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import dummyProblemsData from "../utils/problemsData";
 import Math from "../utils/Math";
 import { IoMdTime } from "react-icons/io";
 import { MdOutlineMemory } from "react-icons/md";
 import { useAppContext } from "../contexts/AppContext";
-const ProblemDetails = () => {
-  const { isDark } = useAppContext();
-  let idx = 2;
+import { useParams } from "react-router-dom";
+import ProblemDetailSkeleton from "./ui/ProblemDetailSkeleton";
 
+const ProblemDetails = () => {
+  const { isDark, problems } = useAppContext();
+  const params = useParams()
+  const slug = params.slug
+  let idx = 2;
+  const [problem, setProblem] = useState({})
+  useEffect(() => {
+    const findProblem = problems.find(prob => prob.slug === slug);
+    if (findProblem) {
+      setProblem(findProblem);
+    }
+  }, [slug, problems])
+  if (!problem || Object.keys(problem).length === 0) return <ProblemDetailSkeleton/>
   return (
     <section
       style={{ whiteSpace: "pre-line" }}
       className={`border ${isDark ? "border-[#3b3440]" : "border-gray-300"} flex flex-col gap-2 rounded-xl shadow-sm h-6/10 w-1/2 px-5 py-4`}
     >
-      <h2 className="font-bold text-lg">{dummyProblemsData[idx].title} :</h2>
-      <p>{dummyProblemsData[2].statement}</p>
-      {/* Input format */}
-      <div>
-        <h3
-          className={`${isDark ? "text-[#b39adb]" : "text-[#6b1eb9]"} font-bold mb-1`}
-        >
-          Input Format:{" "}
-        </h3>
-        <p
-          className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border rounded-md shadow-xs px-4 py-2`}
-        >
-          {dummyProblemsData[idx].input_format}
-        </p>
+      <div className="flex justify-between items-center">
+        <h2 className="font-bold text-lg">{problem.title} :</h2>
+        <div className={`${problem.difficulty == 'easy' && 'bg-green-300 border-green-600'} ${problem.difficulty == 'medium' && 'bg-orange-200 border-orange-500'} ${problem.difficulty == 'hard' && 'bg-red-300 border-red-600'} border rounded-xl px-2 text-sm font-semibold text-black`}>{problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}</div>
       </div>
-      {/* Output format */}
-      <div>
-        <h3
-          className={`${isDark ? "text-[#b39adb]" : "text-[#6b1eb9]"} font-bold mb-1`}
-        >
-          Output Format:{" "}
-        </h3>
-        <p
-          className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border rounded-md shadow-xs px-4 py-2`}
-        >
-          {dummyProblemsData[idx].output_format}
-        </p>
-      </div>
+      <p>{problem.statement}</p>
       {/* Constraints */}
       <div>
         <h3
@@ -51,7 +40,7 @@ const ProblemDetails = () => {
         <p
           className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border rounded-md shadow-xs px-4 py-2 text-center`}
         >
-          <Math formula={dummyProblemsData[idx].constraints} />
+          <Math formula={problem.constraints} />
         </p>
       </div>
       {/* Time and memory limit */}
@@ -63,7 +52,7 @@ const ProblemDetails = () => {
           <h3 className={`${isDark ? "text-[#b39adb]" : "text-[#6b1eb9]"}`}>
             Time Limit (ms):{" "}
           </h3>
-          <p>{dummyProblemsData[idx].time_limit_ms}</p>
+          <p>{problem.timeLimitMs}</p>
         </div>
         <div
           className={`flex justify-center items-center gap-1 ${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border shadow-xs rounded-md px-4 py-1.5`}
@@ -72,7 +61,7 @@ const ProblemDetails = () => {
           <h3 className={`${isDark ? "text-[#b39adb]" : "text-[#6b1eb9]"}`}>
             Memory Limit (kb):{" "}
           </h3>
-          <p>{dummyProblemsData[idx].memory_limit_kb}</p>
+          <p>{problem.memoryLimitKb}</p>
         </div>
       </div>
       {/* Sample Input & Output */}
@@ -85,17 +74,17 @@ const ProblemDetails = () => {
         <p
           className={` ${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border rounded-md shadow-xs px-4 py-2 my-3`}
         >
-          {dummyProblemsData[idx].samples?.[0].input}
+          {problem.example_input}
         </p>
         <p
           className={` ${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border rounded-md shadow-xs px-4 py-2 my-3`}
         >
-          {dummyProblemsData[idx].samples?.[0].output}
+          {problem.example_output}
         </p>
         <p
           className={` ${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 border-gray-200"} border rounded-md shadow-xs px-4 py-2 my-3`}
         >
-          {dummyProblemsData[idx].samples?.[0].explanation}
+          {problem.explaination}
         </p>
       </div>
     </section>

@@ -7,7 +7,7 @@ const Submission = sequelize.define(
   "Submission",
   {
     language_id: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     source_code: {
@@ -26,18 +26,14 @@ const Submission = sequelize.define(
       ),
       defaultValue: "queued",
     },
-    verdict: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     score: {
       type: DataTypes.FLOAT,
     },
     runtime: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     memory: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     stdout: {
       type: DataTypes.TEXT,
@@ -58,7 +54,7 @@ const Submission = sequelize.define(
     updatedAt: false,
   },
 );
-Submission.belongsTo(User, { foreignKey: "userId" });
-Submission.belongsTo(Problem, { foreignKey: "problemId" });
+Submission.belongsTo(User, { foreignKey: "user_id" });
+Submission.belongsTo(Problem, { foreignKey: "problem_id" });
 
 export default Submission;

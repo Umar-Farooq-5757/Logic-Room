@@ -6,6 +6,7 @@ dotenv.config();
 import sequelize from "./config/db.js";
 import userRouter from "./routes/user.routes.js";
 import submissionRouter from "./routes/submission.routes.js";
+import problemRouter from './routes/problem.routes.js'
 
 const port = process.env.PORT;
 app.use(express.json());
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 app.use("/api", userRouter);
 app.use('/api',submissionRouter)
+app.use('/api',problemRouter)
 
 async function startServer() {
   try {

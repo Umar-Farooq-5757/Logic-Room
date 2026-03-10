@@ -14,7 +14,7 @@ const Problem = () => {
   return (
     <>
       <Header />
-      <div className="flex gap-3 px-3 mt-5">
+      <div className="flex gap-3 px-3 mt-5 min-h-190">
         <ProblemDetails />
         {/* Editor */}
         <section className="w-1/2 flex flex-col gap-2">

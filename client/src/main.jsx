@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [
           {
-            path: "/problem",
+            path: "/problem/:slug",
             element: <Problem />,
           }
         ]
