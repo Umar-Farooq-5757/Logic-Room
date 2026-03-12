@@ -6,16 +6,23 @@ import languages from "../utils/languagesData";
 import { FaCode, FaPlay } from "react-icons/fa";
 import Header from "../components/Header";
 import { useAppContext } from "../contexts/AppContext";
-// Expected problem schema
+import SubmissionResult from "../components/SubmissionResult";
+// Expected problem sch../components/SubmissionResult
 // id, title, slug, statement, timeLimitMs, memoryLimitKb, difficulty, tags
 const Problem = () => {
   const { isDark } = useAppContext();
   const [selectedLanguage, setSelectedLanguage] = useState("cpp");
+  const [problem, setProblem] = useState({});
+  const [testCases, setTestCases] = useState([]);
+
   return (
     <>
       <Header />
       <div className="flex gap-3 px-3 mt-5 min-h-190">
-        <ProblemDetails />
+        <div className="flex flex-col gap-3 w-1/2">
+          <ProblemDetails problem={problem} setProblem={setProblem} setTestCases={setTestCases} />
+          <SubmissionResult testCases={testCases} setTestCases={setTestCases} />
+        </div>
         {/* Editor */}
         <section className="w-1/2 flex flex-col gap-2">
           <div className="flex justify-between items-center">
@@ -24,7 +31,7 @@ const Problem = () => {
               <h3 className="text-lg font-semibold">Code</h3>
             </div>
             <button
-              className={`${isDark ? "bg-white text-black" : "bg-black text-white"} text-sm hover:opacity-85 flex items-center justify-center gap-2 py-1.5 px-4 rounded-md`}
+              className={`${isDark ? "bg-white text-black" : "bg-black text-white"} text-sm hover:opacity-75 flex items-center justify-center gap-2 py-1.5 px-4 rounded-md`}
             >
               <FaPlay className="size-3" />
               <span>Submit</span>

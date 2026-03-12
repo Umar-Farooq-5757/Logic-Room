@@ -6,28 +6,40 @@ import { MdOutlineMemory } from "react-icons/md";
 import { useAppContext } from "../contexts/AppContext";
 import { useParams } from "react-router-dom";
 import ProblemDetailSkeleton from "./ui/ProblemDetailSkeleton";
+import api from "../api/axios";
 
-const ProblemDetails = () => {
-  const { isDark, problems } = useAppContext();
-  const params = useParams()
-  const slug = params.slug
-  let idx = 2;
-  const [problem, setProblem] = useState({})
+const ProblemDetails = ({problem,setProblem,setTestCases}) => {
+  const { isDark } = useAppContext();
+  const { slug } = useParams();
+
+  // Fetching problem data and related test cases
   useEffect(() => {
-    const findProblem = problems.find(prob => prob.slug === slug);
-    if (findProblem) {
-      setProblem(findProblem);
-    }
-  }, [slug, problems])
-  if (!problem || Object.keys(problem).length === 0) return <ProblemDetailSkeleton/>
+    const fetchProblem = async () => {
+      try {
+        const response = await api.get(`/getproblem/${slug}`);
+        setProblem(response.data.problem);
+        setTestCases(response.data.testCases)
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchProblem();
+  }, []);
+  if (!problem || Object.keys(problem).length === 0)
+    return <ProblemDetailSkeleton />;
   return (
     <section
       style={{ whiteSpace: "pre-line" }}
-      className={`border ${isDark ? "border-[#3b3440]" : "border-gray-300"} flex flex-col gap-2 rounded-xl shadow-sm h-6/10 w-1/2 px-5 py-4`}
+      className={`border ${isDark ? "border-[#3b3440]" : "border-gray-300"} flex flex-col gap-2 rounded-xl shadow-sm h-6/10 w-full px-5 py-2.5`}
     >
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-lg">{problem.title} :</h2>
-        <div className={`${problem.difficulty == 'easy' && 'bg-green-300 border-green-600'} ${problem.difficulty == 'medium' && 'bg-orange-200 border-orange-500'} ${problem.difficulty == 'hard' && 'bg-red-300 border-red-600'} border rounded-xl px-2 text-sm font-semibold text-black`}>{problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}</div>
+        <div
+          className={`${problem.difficulty == "easy" && "bg-green-300 border-green-600"} ${problem.difficulty == "medium" && "bg-orange-200 border-orange-500"} ${problem.difficulty == "hard" && "bg-red-300 border-red-600"} border rounded-xl px-2 text-sm font-semibold text-black`}
+        >
+          {problem.difficulty.charAt(0).toUpperCase() +
+            problem.difficulty.slice(1)}
+        </div>
       </div>
       <p>{problem.statement}</p>
       {/* Constraints */}

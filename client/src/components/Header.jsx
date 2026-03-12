@@ -9,6 +9,21 @@ const Header = () => {
   const { isDark, setIsDark, user } = useAppContext();
   const navigate = useNavigate();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+   const getInitials = (fullName) => {
+    if (
+      !fullName ||
+      typeof fullName !== "string" ||
+      fullName.trim().length == 0
+    ) {
+      return "";
+    }
+    const nameParts = fullName
+      .trim()
+      .split(/\s+/)
+      .filter((part) => part.length > 0);
+    const initials = nameParts.map((part) => part.charAt(0));
+    return initials.join("").toUpperCase();
+  };
   return (
     <header
       className={`flex justify-between items-center shadow-sm ${isDark && "shadow-[#3b3440]"} py-3 px-32`}
@@ -41,7 +56,7 @@ const Header = () => {
           onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
           className={`p-1.5 relative text-sm rounded-full transition-all text-white font-bold ${isDark ? "bg-[#b39adb]" : "bg-[#6b1eb9]"}`}
         >
-          UF
+          {getInitials(user?.username)}
           {/* Profile Menu */}
           <div className={`${!isProfileMenuOpen && "hidden"} fixed inset-0 z-1000`}>
             <div
@@ -52,13 +67,13 @@ const Header = () => {
                 className={`flex items-center gap-2 ${isDark ? "hover:bg-[#3b3440]" : "hover:bg-gray-100"} w-full rounded-md py-1.5 px-2`}
               >
                 <FaUser className="size-5" />
-                <p>Umar Farooq</p>
+                <p>{user?.username}</p>
               </div>
               <div
                 className={`flex items-center gap-2 ${isDark ? "hover:bg-[#3b3440]" : "hover:bg-gray-100"} w-full rounded-md py-1.5 px-2`}
               >
                 <MdEmail className="size-5" />
-                <p>aamirgel17@gmail.com</p>
+                <p>{user?.email}</p>
               </div>
               <div
                 className={`flex items-center gap-2 ${isDark ? "hover:bg-[#3b3440]" : "hover:bg-gray-100"} w-full rounded-md py-1.5 px-2`}
