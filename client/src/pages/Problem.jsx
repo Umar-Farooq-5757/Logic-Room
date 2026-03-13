@@ -17,6 +17,7 @@ const Problem = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("cpp");
   const [problem, setProblem] = useState({});
   const [testCases, setTestCases] = useState([]);
+    const [code, setCode] = useState(``);
 
   // Fetching problem data and related test cases
   useEffect(() => {
@@ -31,6 +32,17 @@ const Problem = () => {
     };
     fetchProblem();
   }, []);
+  // Submitting Code
+  const submitCode = async()=>{
+    try {
+      const res = await api.post('/submit',{language_id:54,source_code:code,stdin:"UmarFarooq"})
+      const token = await res.data.token;
+      const result = await api.get(`/poll/${token}`);
+      console.log(result.data)
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
   return (
     <>
       <Header />
@@ -47,6 +59,7 @@ const Problem = () => {
               <h3 className="text-lg font-semibold">Code</h3>
             </div>
             <button
+            onClick={submitCode}
               className={`${isDark ? "bg-white text-black" : "bg-black text-white"} text-sm hover:opacity-75 flex items-center justify-center gap-2 py-1.5 px-4 rounded-md`}
             >
               <FaPlay className="size-3" />
@@ -59,8 +72,9 @@ const Problem = () => {
             />
           </div>
           <Editor
-            language="javascript"
-            value={"function hello(){\n  console.lo('hi')\n}\n"}
+            language="cpp"
+            code={code}
+            setCode={setCode}
             showLineNumbers={true}
           />
         </section>

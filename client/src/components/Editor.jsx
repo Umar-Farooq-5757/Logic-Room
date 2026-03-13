@@ -9,12 +9,10 @@ export default function Editor({
   language = "javascript",
   fontSize = 14,
   showLineNumbers = true,
+  code,setCode
 }) {
   const {isDark} = useAppContext()
-  const [code, setCode] = useState(
-    `function hello() {\n\tconsole.log("Hello World");
-}`,
-  );
+
 
   const textareaRef = useRef(null);
   const highlightRef = useRef(null);
