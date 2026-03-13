@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "../components/Editor";
 import ProblemDetails from "../components/ProblemDetails";
 import Dropdown from "../components/ui/Dropdown";
@@ -7,21 +7,37 @@ import { FaCode, FaPlay } from "react-icons/fa";
 import Header from "../components/Header";
 import { useAppContext } from "../contexts/AppContext";
 import SubmissionResult from "../components/SubmissionResult";
+import api from "../api/axios";
+import { useParams } from "react-router-dom";
 // Expected problem sch../components/SubmissionResult
 // id, title, slug, statement, timeLimitMs, memoryLimitKb, difficulty, tags
 const Problem = () => {
   const { isDark } = useAppContext();
+  const { slug } = useParams();
   const [selectedLanguage, setSelectedLanguage] = useState("cpp");
   const [problem, setProblem] = useState({});
   const [testCases, setTestCases] = useState([]);
 
+  // Fetching problem data and related test cases
+  useEffect(() => {
+    const fetchProblem = async () => {
+      try {
+        const response = await api.get(`/getproblem/${slug}`);
+        setProblem(response.data.problem);
+        setTestCases(response.data.testCases)
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    fetchProblem();
+  }, []);
   return (
     <>
       <Header />
       <div className="flex gap-3 px-3 mt-5 min-h-190">
         <div className="flex flex-col gap-3 w-1/2">
-          <ProblemDetails problem={problem} setProblem={setProblem} setTestCases={setTestCases} />
-          <SubmissionResult testCases={testCases} setTestCases={setTestCases} />
+          <ProblemDetails problem={problem}/>
+          <SubmissionResult testCases={testCases}  />
         </div>
         {/* Editor */}
         <section className="w-1/2 flex flex-col gap-2">
@@ -44,9 +60,7 @@ const Problem = () => {
           </div>
           <Editor
             language="javascript"
-            value={"function hello(){\n  console.log('hi')\n}\n"}
-            fontSize={16}
-            fontFamily={"'Fira Code', monospace"}
+            value={"function hello(){\n  console.lo('hi')\n}\n"}
             showLineNumbers={true}
           />
         </section>

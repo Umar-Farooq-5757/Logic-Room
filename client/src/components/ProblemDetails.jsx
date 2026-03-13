@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from "react";
 import dummyProblemsData from "../utils/problemsData";
 import Math from "../utils/Math";
 import { IoMdTime } from "react-icons/io";
 import { MdOutlineMemory } from "react-icons/md";
 import { useAppContext } from "../contexts/AppContext";
-import { useParams } from "react-router-dom";
 import ProblemDetailSkeleton from "./ui/ProblemDetailSkeleton";
-import api from "../api/axios";
 
-const ProblemDetails = ({problem,setProblem,setTestCases}) => {
+const ProblemDetails = ({problem}) => {
   const { isDark } = useAppContext();
-  const { slug } = useParams();
-
-  // Fetching problem data and related test cases
-  useEffect(() => {
-    const fetchProblem = async () => {
-      try {
-        const response = await api.get(`/getproblem/${slug}`);
-        setProblem(response.data.problem);
-        setTestCases(response.data.testCases)
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    fetchProblem();
-  }, []);
+  
   if (!problem || Object.keys(problem).length === 0)
     return <ProblemDetailSkeleton />;
   return (

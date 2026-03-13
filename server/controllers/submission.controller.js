@@ -163,7 +163,23 @@ const submit = async (req, res) => {
             });
     }
 }
+const poll = async (req,res)=>{
+    try {
+        const token = req.params.token;
+        const result = await pollForResult(token);
+        res.json({ success: true, result });
+    } catch (err) {
+        console.error("status error:", err.message || err);
+        res
+            .status(500)
+            .json({
+                success: false,
+                error: err.message,
+                details: err.httpData || null,
+            });
+    }
 
+}
 const checkResult = async (req, res) => {
     try {
         const token = req.params.token;
@@ -232,4 +248,4 @@ const createSubmission = async (req, res) => {
 // Health check
 const checkHealth = (req, res) => res.json({ ok: true, ts: Date.now() })
 
-export default { submit, checkResult, runCode, checkHealth,createSubmission }
+export default { submit,poll, checkResult, runCode, checkHealth,createSubmission }

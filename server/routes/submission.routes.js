@@ -16,7 +16,8 @@ const limiter = rateLimit({
 router.use(limiter);
 
 router.post('/submit', protect, submissionController.submit);
-router.get('/submission/:token', protect, submissionController.checkResult);
+router.get('/check-result/:token', protect, submissionController.checkResult);
+router.get('/poll/:token', protect, submissionController.poll);
 // Alternative method (run)
 router.post('/run', protect, submissionController.runCode);
 router.get("/health", protect, submissionController.checkHealth);

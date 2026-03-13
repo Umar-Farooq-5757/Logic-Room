@@ -49,8 +49,8 @@ const SubmissionResult = ({ testCases }) => {
                     <div className={`${isDark ? "border-[#3b3440]" : "border-gray-300"} border rounded-md shadow-sm py-1 px-10`}>{testCase.input}</div>
                     <div className="font-extrabold">{'==>'}</div>
                     <div className={`${isDark ? "border-[#3b3440]" : "border-gray-300"} border rounded-md shadow-sm py-1 px-10 relative`}>
-                      <div><FaCircleCheck className="text-green-600 size-5 self-start absolute right-2"/></div>
-                      {/* <div><FaCircleXmark className="text-red-500 size-5 self-start absolute right-2"/></div> */}
+                      <div><FaCircleCheck className="text-green-600 size-3.5 self-start absolute -top-1 -right-1"/></div>
+                      {/* <div><FaCircleXmark className="text-red-500 size-3.5 self-start absolute -top-1 -right-1"/></div> */}
                       <div>{testCase.output}</div>
                     </div>
                   </div>
