@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useAppContext } from "../../contexts/AppContext";
 
-const Dropdown = ({ selectedLanguage, setSelectedLanguage, languages }) => {
+const Dropdown = ({ selectedLanguage, setSelectedLanguage, languages,setSelectedLanguageID }) => {
   const { isDark } = useAppContext();
   const [isOpen, setIsOpen] = useState(false);
   const handleSelect = (language) => {
     setSelectedLanguage(language);
+    const filtered = languages.find(lang=>lang.value==language)
+    setSelectedLanguageID(filtered.id)
+    console.log(filtered.id)
     setIsOpen(false);
   };
   return (

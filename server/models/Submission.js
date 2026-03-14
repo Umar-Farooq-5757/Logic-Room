@@ -15,19 +15,8 @@ const Submission = sequelize.define(
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM(
-        "queued",
-        "running",
-        "accepted",
-        "wrong_answer",
-        "runtime_error",
-        "compile_error",
-        "judged",
-      ),
+      type: DataTypes.STRING,
       defaultValue: "queued",
-    },
-    score: {
-      type: DataTypes.FLOAT,
     },
     runtime: {
       type: DataTypes.INTEGER,

@@ -4,8 +4,8 @@ import { FaCircleCheck ,FaCircleXmark} from "react-icons/fa6";
 
 const SubmissionResult = ({ testCases }) => {
   const { isDark } = useAppContext();
-  const [isCodeSubmitted, setIsCodeSubmitted] = useState(true);
-  const [selectedTab, setSelectedTab] = useState("compile-output");
+  const [isCodeSubmitted, setIsCodeSubmitted] = useState(false);
+  const [selectedTab, setSelectedTab] = useState("test-results");
   return (
     <div
       className={`border ${isDark ? "border-[#3b3440]" : "border-gray-300"} flex flex-col gap-2 rounded-xl shadow-sm h-6/10 w-full px-5 py-2.5`}
@@ -16,13 +16,13 @@ const SubmissionResult = ({ testCases }) => {
         {/* Tabs */}
         <div className="flex items-center gap-5">
           <div
-            className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 hover:bg-gray-200 border-gray-200"} shadow-xs cursor-default border rounded-md px-2.5 py-0.5`}
+            className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 hover:bg-gray-200 border-gray-200"} text-sm shadow-xs cursor-default border rounded-md px-2.5 py-0.5`}
             onClick={() => setSelectedTab("compile-output")}
           >
             Compile Output
           </div>
           <div
-            className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 hover:bg-gray-200 border-gray-200"} shadow-xs cursor-default border rounded-md px-2.5 py-0.5`}
+            className={`${isDark ? "bg-transparent border-[#3b3440]" : "bg-gray-100 hover:bg-gray-200 border-gray-200"} text-sm shadow-xs cursor-default border rounded-md px-2.5 py-0.5`}
             onClick={() => setSelectedTab("test-results")}
           >
             Test Results
